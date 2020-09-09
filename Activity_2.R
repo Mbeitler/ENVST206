@@ -90,6 +90,76 @@ pnorm(5,
       sd(datW$TAVE[datW$siteN == 1],na.rm=TRUE)) - pnorm(0,
                                                          mean(datW$TAVE[datW$siteN == 1],na.rm=TRUE),
                                                          sd(datW$TAVE[datW$siteN == 1],na.rm=TRUE))
+#pnorm of 20 gives me all probability below 20
+#subtract 1 to get area above 20
+
+1 - pnorm(20,
+          mean(datW$TAVE[datW$siteN == 1],na.rm=TRUE),
+          sd(datW$TAVE[datW$siteN == 1],na.rm=TRUE))
+
+#qnorm gives the value at which all other values below equal the probability given in the argument. 
+#Calculating the value of probability of .95
+
+qnorm(0.95,
+      mean(datW$TAVE[datW$siteN == 1],na.rm=TRUE),
+      sd(datW$TAVE[datW$siteN ==1],na.rm=TRUE))
+
+#histogram of Aberdeen adding 4 degrees
+CCAtemp <- datW$TAVE + 4
+
+hist(CCAtemp[datW$siteN == 1],
+     freq=FALSE,
+     main = paste(levels(datW$NAME)[1]),
+     xlab = "Average daily temperature (degrees C)",
+     ylab = "Relative frequency",
+     col= "blue",
+     border="white")
+
+#Find probability of climate change temperatures to be above the threshold for extreme temps
+1 - pnorm(20,
+          mean(CCAtemp[datW$siteN == 1],na.rm=TRUE),
+          sd(CCAtemp[datW$siteN == 1],na.rm=TRUE))
+
+
+#Give names to the data so it is easier to type
+ABprecip <- datW$PRCP[datW$siteN == 1]
+Aberdeen <- datW$siteN == 1
+
+#Make histogram for precipitation data
+hist(ABtemp[Aberdeen],
+     freq=FALSE,
+     main = paste(levels(datW$NAME)[1]),
+     xlab = "Average daily Precipitation",
+     ylab = "Relative frequency",
+     col= "blue",
+     border="white")
+
+#Get total precip across all sites
+TotalPrecip <- aggregate(datW$PRCP, by=list(datW$NAME), FUN="sum",na.rm=TRUE)
+TotalPrecip
+
+#make Labels for annual precip of aberdeen and mandan
+ABprecip <- aggregate(datW$PRCP, by=list(datW$NAME == 1), FUN="sum",na.rm=TRUE)
+MANprecip <- aggregate(datW$PRCP, by=list(datW$NAME == 3), FUN="sum",na.rm=TRUE)
+
+
+#Histogram for Aberdeen and Mandan annual precipitation
+hist(ABprecip,
+     freq=FALSE,
+     main = paste(levels(datW$NAME)[1]),
+     xlab = "Average Annual Precipitation",
+     ylab = "Relative frequency",
+     col= "blue",
+     border="white")
+
+hist(MANprecip,
+     freq=FALSE,
+     main = paste(levels(datW$NAME)[3]),
+     xlab = "Average Annual Precipitation",
+     ylab = "Relative frequency",
+     col= "red",
+     border="white")
+
 
 
 
