@@ -4,7 +4,7 @@ heights <- c(3, 2, 3)
 
 heights[1]
 
-#Creating Vectors
+#QUeSTION 2 - Creating Vectors
 Character_Vector <- c("1", "2", "3", "Hi", "Bye")
 Character_Vector
 
@@ -79,7 +79,7 @@ hist(datW$TAVE[datW$siteN == 1],
      col= "blue",
      border="white")
 
-#Question 4 Histogram for Mormon Flat AZ
+#QUESTION 4 - Histogram for Mormon Flat AZ
 hist(datW$TAVE[datW$siteN == 4],
      freq=FALSE,
      main = paste(levels(datW$NAME)[4]),
@@ -119,7 +119,7 @@ qnorm(0.95,
       mean(datW$TAVE[datW$siteN == 1],na.rm=TRUE),
       sd(datW$TAVE[datW$siteN ==1],na.rm=TRUE))
 
-#histogram of Aberdeen adding 4 degrees
+# QUESTION 5 - histogram of Aberdeen adding 4 degrees  
 CCAtemp <- datW$TAVE + 4
 
 hist(CCAtemp[datW$siteN == 1],
@@ -135,7 +135,7 @@ hist(CCAtemp[datW$siteN == 1],
           mean(CCAtemp[datW$siteN == 1],na.rm=TRUE),
           sd(CCAtemp[datW$siteN == 1],na.rm=TRUE))
 
-#Make histogram for precipitation data
+#QUESTION 6 - Make histogram for precipitation data
 hist(datW$PRCP[datW$siteN == 1],
      freq=FALSE,
      main = paste(levels(datW$NAME)[1]),
@@ -145,7 +145,7 @@ hist(datW$PRCP[datW$siteN == 1],
      border="white")
 
 
-#Get total precip across all sites for each year
+#QUESTION 7 - Get total precip across all sites for each year
 Annual_Precip <- aggregate(datW$PRCP, by=list(datW$NAME, datW$year), FUN="sum",na.rm=TRUE)
 colnames(Annual_Precip) <- c("Site", "Year", "Annual Precipitation")
 Annual_Precip
@@ -154,7 +154,7 @@ Annual_Precip$Site <- as.factor(Annual_Precip$Site)
 Annual_Precip$Site <- as.numeric(Annual_Precip$Site)
 Annual_Precip$Site
 
-#Histogram for Aberdeen and Mandan annual precipitation
+#QUESTION 8 - Histogram for Aberdeen and Mandan annual precipitation
 hist(Annual_Precip$`Annual Precipitation`[Annual_Precip$Site == 1],
      freq=FALSE,
      main = paste(levels(datW$NAME)[1]),
@@ -171,10 +171,15 @@ hist(Annual_Precip$`Annual Precipitation`[Annual_Precip$Site == 3],
      col= "pink",
      border="white")
 
+#QUESTION 9 - Find probability of a year with 700 mm of percipitation or less
+#Find p(PRCP<700) for Aberdeen and For Mandan
+
+#Aberdeen
 pnorm(700,
           mean(Annual_Precip$`Annual Precipitation`[Annual_Precip$Site == 1],na.rm=TRUE),
           sd(Annual_Precip$`Annual Precipitation`[Annual_Precip$Site == 1],na.rm=TRUE))
 
+#Mandan
 pnorm(700,
       mean(Annual_Precip$`Annual Precipitation`[Annual_Precip$Site == 3],na.rm=TRUE),
       sd(Annual_Precip$`Annual Precipitation`[Annual_Precip$Site == 3],na.rm=TRUE))
