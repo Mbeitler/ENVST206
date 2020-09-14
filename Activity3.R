@@ -23,5 +23,15 @@ bartlett.test(ch4$CH4_Flux ~ ch4$herbivory)
 #T-test, 2 sample, test difference between groups.
 t.test(ch4$CH4_Flux ~ ch4$herbivory)
 
+########## QUESTION 1 ##########
+#Get means
+mean(ch4$CH4_Flux)
+
+#T-test, 2 sample, test difference between groups.
+#Null hypothesis: There is no difference in means of where lemmings graze and where they don't.
+t.test(ch4$CH4_Flux ~ ch4$herbivory)
+
+#read in insect data
+datI <- read.csv("/Users/hkropp/Google Drive/teaching/2020/Fall 2020/EnvDataSci/activity/data/activity 3/insect_richness.csv")
 
 
