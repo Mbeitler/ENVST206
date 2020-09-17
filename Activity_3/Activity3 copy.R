@@ -32,38 +32,6 @@ mean(ch4$CH4_Flux)
 t.test(ch4$CH4_Flux ~ ch4$herbivory)
 
 #read in insect data
-datI <- read.csv("/Users/madelynbeitler/GitHub/ENVSTDATA/Activity3Data/insect_richness.csv")
+datI <- read.csv("/Users/hkropp/Google Drive/teaching/2020/Fall 2020/EnvDataSci/activity/data/activity 3/insect_richness.csv")
 
-#Make urbanName a factor
-datI$urbanName <- as.factor(datI$urbanName)
 
-#Test for normality 
-shapiro.test(datI$Richness[datI$urbanName == "Suburban"])
-
-shapiro.test(datI$Richness[datI$urbanName == "Developed"])
-
-shapiro.test(datI$Richness[datI$urbanName == "Dense"])
-
-shapiro.test(datI$Richness[datI$urbanName == "Natural"])
-
-#Conduct Bartlett test to check if variance are different between groups.
-bartlett.test(datI$Richness ~ datI$urbanName)
-
-#specify model for species richness and urban type
-in.mod <- lm(datI$Richness ~ datI$urbanName)
-
-#run the ANOVA
-in.aov <- aov(in.mod)
-
-#print out ANOVA table
-summary(in.aov)
-
-#run Tukey HSD
-tukeyT <- TukeyHSD(in.aov)
-
-#view results
-tukeyT
-
-#make a plot
-#make axes labels smaller than usual to fit on plot using cex.axis 
-plot(tukeyT, cex.axis=0.75)
