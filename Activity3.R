@@ -67,3 +67,19 @@ tukeyT
 #make a plot
 #make axes labels smaller than usual to fit on plot using cex.axis 
 plot(tukeyT, cex.axis=0.75)
+
+tapply(datI$Richness, datI$urbanName, "mean")
+
+#set up contigency table
+species <- matrix(c(18,8,15,32), ncol=2, byrow = TRUE) 
+colnames(species) <- c("Not protected", "Protected")
+rownames(species) <- c("Declining", "Stable/Increase")
+
+#make a mosaic plot with an informative title and axes labels
+mosaicplot(species, xlab="population status", ylab="legal protection",
+           main="Legal protection impacts on populations")
+
+#Conduct a chi-squared test
+chisq.test(species)
+
+
