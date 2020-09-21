@@ -41,5 +41,23 @@ abline(h=0)
 #Print results of regression
 summary(dam.mod)
 
+#make plot of beaver dams and surface water
+plot(datB$dams.n, datB$area.h, 
+     pch = 19, 
+     col = "royalblue4",
+     ylab = "Surface water area (ha)",
+     xlab =  "Number of beaver dams")
+
+#add regression line
+#make line width thicker
+abline(dam.mod, lwd=2)
+
+#Read phenology data
+pheno <- read.csv("/Users/madelynbeitler/GitHub/ENVSTDATA/Activity4Data/a04/red_maple_pheno.csv")
+
+
+
+
+
 
 
