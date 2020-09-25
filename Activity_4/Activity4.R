@@ -117,5 +117,11 @@ mlFitted
 #Print summary 
 summary(mlr)
 
+#qqnorm to test for normality
+pheno.res <- rstandard(mlr)
+qqnorm(pheno.res)
+qqline(pheno.res)
+
+plot(mlFitted, pheno.res)
 
 
