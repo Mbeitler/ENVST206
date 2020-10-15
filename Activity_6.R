@@ -61,13 +61,12 @@ gAll$gdiff <- ((gAll$area66-gAll$area15)/gAll$area66)*100
 install.packages("ggplot2")
 library(ggplot2)
 
-ggplot(data = gAll, aes(x = GLACNAME, y=area66))+
+ggplot(data = gAll, aes(x = area66, y= gdiff))+
   geom_point()+ #make points at data point
-  geom_path()+ #use lines to connect data points
-  labs(x="Glacier Area (meters squared)", y="Percent change in area")+
-  theme_classic()
-
-
+  labs(x="Glacier Area (km squared)", y="% Change in Area (km squared)")+
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))+
+  theme_classic()+
+  theme(axis.text.x = element_text(size = 8))
 
 
 
