@@ -68,70 +68,7 @@ ggplot(data = gAll, aes(x = area66, y= gdiff))+
   theme_classic()+
   theme(axis.text.x = element_text(size = 8))
 
-#join data with the spatial data table and overwrite into spatial data table 
-g1966@data <- left_join(g1966@data, gAll, by="GLACNAME")
 
-#use spplot to shade polygons based on the % change of labels
-#first argument is the spatial object
-#second is the column in of data to display with the different colors
-#add a title using main
-#col changes the color of the borders. This argument sets them to transparent
-spplot(g1966, "gdiff", main="% change in area", col="transparent")
-
-#look at the Vulture glacier in 1966
-vulture66 <- g1966[g1966@data$GLACNAME == "Vulture Glacier",]
-plot(vulture66, main = "Vulture Glacier in 1966", col="slategray")
-
-#Mean of % loss
-mean(gAll$gdiff)
-
-#stdev of % loss
-sd(gAll$gdiff)
-
-#find largest glacier loss
-max(gAll$gdiff)
-
-#Find smallest glacier lost
-min(gAll$gdiff)
-
-boulder66 <- g1966[g1966@data$GLACNAME == "Boulder Glacier",]
-boulder15 <- g2015[g2015@data$GLACNAME == "Boulder Glacier",]
-
-#Plot both
-plot(boulder66, main = "Boulder Glacier Retreat from 1966 to 2015", col="slategrey")
-plot(boulder15, col= "lightcyan1", add=TRUE)
-
-legend("topleft", 
-       legend = c("1966", "2015"), 
-       col = c("slategrey", 
-               "lightcyan1"), 
-       pch = c(15), 
-       bty = "n", 
-       pt.cex = 2, 
-       cex = 1.2, 
-       text.col = "black", 
-       horiz = F , 
-       inset = c(0.1, 0.1))
-
-#New variables for pumpelly
-pumpelly66 <- g1966[g1966@data$GLACNAME == "Pumpelly Glacier",]
-pumpelly15 <- g2015[g2015@data$GLACNAME == "Pumpelly Glacier",]
-
-#Plot Pumpelly Glacier 
-plot(pumpelly66, main = "Pumpelly Glacier Retreat from 1966 to 2015", col="slategrey")
-plot(pumpelly15, col= "lightcyan1", add=TRUE)
-
-legend("topleft", 
-       legend = c("1966", "2015"), 
-       col = c("slategrey", 
-               "lightcyan1"), 
-       pch = c(15), 
-       bty = "n", 
-       pt.cex = 2, 
-       cex = 1.2, 
-       text.col = "black", 
-       horiz = F , 
-       inset = c(0.1, 0.1))
 
 
 
