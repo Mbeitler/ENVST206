@@ -14,6 +14,8 @@ g1966 <- readOGR("/Users/madelynbeitler/GitHub/ENVSTDATA/Activity6Data/GNPglacie
 
 plot(g1966)
 
+g1966@proj4string
+
 #glaciers in 2015
 g2015 <- readOGR("/Users/madelynbeitler/GitHub/ENVSTDATA/Activity6Data/GNPglaciers/GNPglaciers_2015.shp")
 
@@ -39,7 +41,6 @@ g2015@data$GLACNAME <- ifelse(g2015@data$GLACNAME == "North Swiftcurrent Glacier
                                         "Miche Wabun Glacier",
                                         as.character(g2015@data$GLACNAME)))
 
-
 #lets combine area, first work with a smaller data frame
 gdf66 <- data.frame(GLACNAME = g1966@data$GLACNAME,
                     area66 = g1966@data$Area1966)
@@ -56,17 +57,14 @@ gAll
 #calculate the % change in area from 1966 to 2015
 gAll$gdiff <- ((gAll$area66-gAll$area15)/gAll$area66)*100
 
-
 #install package
 install.packages("ggplot2")
 library(ggplot2)
 
 ggplot(data = gAll, aes(x = area66, y= gdiff))+
   geom_point()+ #make points at data point
-  labs(x="Glacier Area (km squared)", y="% Change in Area (km squared)")+
-  theme(axis.text.x = element_text(angle = 45, hjust = 1))+
-  theme_classic()+
-  theme(axis.text.x = element_text(size = 8))
+  labs(x="Glacier Area (km squared)", y="% Change in Area")+
+  theme_classic()
 
 #join data with the spatial data table and overwrite into spatial data table 
 g1966@data <- left_join(g1966@data, gAll, by="GLACNAME")
