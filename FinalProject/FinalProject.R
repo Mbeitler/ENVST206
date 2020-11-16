@@ -81,3 +81,4 @@ plot(sea_ice_1980, main = "Arctic Sea Ice Area in 1980 and 2018", col = "lightbl
 
 
 
+
